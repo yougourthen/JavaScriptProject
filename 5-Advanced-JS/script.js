@@ -235,7 +235,121 @@ interviwQuestion ('designer')('amirouche');
 interviwQuestion ('rien')('farou');
 */
 
-// Added Change from the cloned repository 
+////////////////////////////////////////
+//Lecture :Bind, Call and apply Method
+
+var jhon = {
+    name : 'jhon',
+    age : 25, 
+    job : 'teacher',
+    presentation : function (style, timeOfDay){
+        if (style === 'formal'){
+            console.log('good '+timeOfDay+' my name is '+this.name+  
+            ' and my job is a '+this.job+' and my age is '+this.age+'years old');
+        }else if (style === 'friendly'){
+            console.log('hy my friend good '+timeOfDay+' i\'m '+this.name+  
+            ' and my job is '+this.job);
+        }
+    }
+};
+
+jhon.presentation('formal', 'morning');
+
+var emily = {
+    name : 'emily',
+    age : 20,
+    job : 'designer'
+};
+
+//we can use the presentation method of jhon for an other object like emily
+//for that we use Call method wich accept three arguments
+//the first is to set the This variable to an other objet like emily in this case
+// and set the two others.
+jhon.presentation.call(emily, 'friendly', 'night');
+
+// the apply method is similar than the Call method
+//but in this case we put the second and the third argument in an array 
+jhon.presentation.apply(emily, ['friendly', 'afternoon']);
+
+//the Bind method generate a copy of a function with a preset attribute
+//because of that we store it in a variable
+//and call this variable for the second argument
+var johnFriendly = jhon.presentation.bind(jhon, 'friendly');
+johnFriendly('morning');
+
+//bind method, this variable set to emily
+var emilyFormel = jhon.presentation.bind(emily, 'formal');
+emilyFormel('afternoon');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
