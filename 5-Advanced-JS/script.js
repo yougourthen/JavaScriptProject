@@ -235,7 +235,9 @@ interviwQuestion ('designer')('amirouche');
 interviwQuestion ('rien')('farou');
 */
 
-let x = 10;
+//dkjkjhkjedkcvjdkjdkjdekfjdkjkdfj
+
+let y = 25;
 
 
 
