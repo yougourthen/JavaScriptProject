@@ -237,7 +237,7 @@ interviwQuestion ('rien')('farou');
 
 ////////////////////////////////////////
 //Lecture :Bind, Call and apply Method
-
+/*
 var jhon = {
     name : 'jhon',
     age : 25, 
@@ -277,9 +277,97 @@ jhon.presentation.apply(emily, ['friendly', 'afternoon']);
 var johnFriendly = jhon.presentation.bind(jhon, 'friendly');
 johnFriendly('morning');
 
-//bind method, this variable set to emily
+//bind method, (this) variable set to emily
 var emilyFormel = jhon.presentation.bind(emily, 'formal');
 emilyFormel('afternoon');
+
+//precedent exemple to use bind method
+
+var year = [1965, 2008, 2010,1999, 1988];
+
+var arrayCalc = function (arryear, fn){
+    var arResult = [];
+    for(var i = 0; i < arryear.length; i++){
+        arResult.push(fn(arryear[i]));
+    }
+    return arResult;
+}
+
+var calcAge = function (el){
+    return (2020 - el);
+}
+
+function isFullage (limit, el){
+    return el >= limit;
+}
+
+var age = arrayCalc(year, calcAge);
+
+var fullUsa = arrayCalc(age, isFullage.bind(this,20));
+console.log(age);
+console.log(fullUsa);
+
+var fullAlgeria = arrayCalc(age, isFullage.bind(this, 18));
+console.log(fullAlgeria); */
+
+
+/*****************************************************************
+                Instruction for the Code Chalenge 
+********************************************************************/
+/*
+--- Let's build a fun quiz game in the console! ---
+
+1. Build a function constructor called Question to describe a question. A question should include:
+a) question itself
+b) the answers from which the player can choose the correct one (choose an adequate data structure here, array, object, etc.)
+c) correct answer (I would use a number for this)
+
+2. Create a couple of questions using the constructor
+
+3. Store them all inside an array
+
+4. Select one random question and log it on the console, together with the possible answers (each question should have a number) (Hint: write a method for the Question objects for this task).
+
+5. Use the 'prompt' function to ask the user for the correct answer. The user should input the number of the correct answer such as you displayed it on Task 4.
+
+6. Check if the answer is correct and print to the console whether the answer is correct ot nor (Hint: write another method for this).
+
+7. Suppose this code would be a plugin for other programmers to use in their code. So make sure that all your code is private and doesn't interfere with the other programmers code (Hint: we learned a special technique to do exactly that).
+*/
+
+/*/*****************************************************************
+                Instruction for the Code Chalenge 
+********************************************************************/
+
+var answerProp = [];
+
+Question = function (question, answerProp, corectAnswer){
+
+    this.question = question;
+    this.answerProp = answerProp
+    this.corectAnswer = corectAnswer
+};
+
+
+var question1 = new Question ("Javascript is he a best popular language ?",['True', 'False', ], 'True');
+var question2 = new Question ("Give me the correct syntax ?",['Var x =  ', 'var x = ', ], 'var x = ');
+
+var quewiz = [question1, question2];
+
+console.log(question1.question);
+console.log('----------------------------------------');
+console.log(answerProp[0]);
+
+
+
+
+
+
+
+
+
+
+
 
 
 
