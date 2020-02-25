@@ -339,24 +339,46 @@ c) correct answer (I would use a number for this)
                 Instruction for the Code Chalenge 
 ********************************************************************/
 
-var answerProp = [];
 
 Question = function (question, answerProp, corectAnswer){
 
     this.question = question;
-    this.answerProp = answerProp
-    this.corectAnswer = corectAnswer
+    this.answerProp = answerProp;
+    this.corectAnswer = corectAnswer;
 };
 
+//var propQuestion1 = ['True', 'False', ];
+//var propQuestion2 = ['Var x =  ', 'var x = ', 'var x :'];
+var question1 = new Question ("Javascript is he a best popular language ?",['True', 'False', ], 1);
+var question2 = new Question ("Give me the correct syntax ?",['Var x =  ', 'var x = ', 'var x :'], 1);
+var question1 = new Question ("give the name of the instructor of this course ?",['jugurtha', 'goumez', 'lina' ], 1);
 
-var question1 = new Question ("Javascript is he a best popular language ?",['True', 'False', ], 'True');
-var question2 = new Question ("Give me the correct syntax ?",['Var x =  ', 'var x = ', ], 'var x = ');
+//put the question in the table
+var tableQuestion = [question1, question2];
 
-var quewiz = [question1, question2];
+//ruturn question randomly
+var quewiz = randomQuestion(tableQuestion);
 
-console.log(question1.question);
-console.log('----------------------------------------');
-console.log(answerProp[0]);
+console.log(quewiz.question);
+for (i = 0; i < quewiz.answerProp.length; i++){
+    console.log(i+'-'+quewiz.answerProp[i]);
+}
+
+var essai = prompt("inter the correct answer", );
+if (essai == quewiz.corectAnswer){
+    console.log('yes it\'s the correct one');
+}else {
+    console.log('oups Wrong Answer!!');
+}
+
+
+//Function to return ramdomly item from an array 
+function randomQuestion(arrayQuestion)
+{
+  
+return arrayQuestion[Math.floor(Math.random()*arrayQuestion.length)];
+     
+}
 
 
 
