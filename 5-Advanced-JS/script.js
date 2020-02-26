@@ -340,45 +340,75 @@ c) correct answer (I would use a number for this)
 ********************************************************************/
 
 
-Question = function (question, answerProp, corectAnswer){
+(
+  function game (){
 
-    this.question = question;
-    this.answerProp = answerProp;
-    this.corectAnswer = corectAnswer;
-};
+    Question = function (question, answerProp, corectAnswer){
 
-//var propQuestion1 = ['True', 'False', ];
-//var propQuestion2 = ['Var x =  ', 'var x = ', 'var x :'];
-var question1 = new Question ("Javascript is he a best popular language ?",['True', 'False', ], 1);
-var question2 = new Question ("Give me the correct syntax ?",['Var x =  ', 'var x = ', 'var x :'], 1);
-var question1 = new Question ("give the name of the instructor of this course ?",['jugurtha', 'goumez', 'lina' ], 1);
+        this.question = question;
+        this.answerProp = answerProp;
+        this.corectAnswer = corectAnswer;
+    };
+    
+    // chick if the answer is correct
+    Question.prototype.correction = function(anw, qt){
+        if (anw !== 'exit'){
+            if (anw == qt.corectAnswer){
+                score += 1;
+                console.log(' correct and score is : '+score);
+            }else {
+                console.log(' Wrong Answer score still '+score);
+            }
+        }
+    }
+    
+    // return a random answer in an array 
+    Question.prototype.randmQuestion = function (ary){
+        return ary[Math.floor(Math.random() * ary.length) ];
+    }
+    
+    
+    var question1 = new Question ("Javascript is he a best popular language ?",['True', 'False'], 0);
+    var question2 = new Question ("Give me the correct syntax ?",['Var x =  ', 'var x = ', 'var x :'], 1);
+    var question3 = new Question ("wich language is not POO language ?",['Paython', 'Java', 'C'], 2);
+    
+    var quewiz = new Question ();
+    //put the question in the table
+    var tableQuestion = [question1, question2, question3];
+    //variable score
+    var score = 0;
+    //ruturn question randomly
+     quewiz = quewiz.randmQuestion(tableQuestion);
+    
+    console.log(quewiz.question);
+    for (var i = 0; i < quewiz.answerProp.length; i++){
+        console.log(i+'-'+quewiz.answerProp[i]);
+    }
+    var essai = prompt("enter the correct answer", );
+    quewiz.correction (essai, quewiz);
 
-//put the question in the table
-var tableQuestion = [question1, question2];
+    while (essai !== 'exit'){
+        console.log('----------------------------------');
+        quewiz = quewiz.randmQuestion(tableQuestion);
+        console.log(quewiz.question);
+    for (var i = 0; i < quewiz.answerProp.length; i++){
+        console.log(i+'-'+quewiz.answerProp[i]);
+    }
+        essai = prompt("enter the correct answer", );
+        quewiz.correction (essai, quewiz);
+    }
 
-//ruturn question randomly
-var quewiz = randomQuestion(tableQuestion);
-
-console.log(quewiz.question);
-for (i = 0; i < quewiz.answerProp.length; i++){
-    console.log(i+'-'+quewiz.answerProp[i]);
-}
-
-var essai = prompt("inter the correct answer", );
-if (essai == quewiz.corectAnswer){
-    console.log('yes it\'s the correct one');
-}else {
-    console.log('oups Wrong Answer!!');
-}
+  }
+)()
 
 
-//Function to return ramdomly item from an array 
-function randomQuestion(arrayQuestion)
-{
-  
-return arrayQuestion[Math.floor(Math.random()*arrayQuestion.length)];
-     
-}
+
+
+
+
+
+
+
 
 
 
