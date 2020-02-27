@@ -339,7 +339,8 @@ c) correct answer (I would use a number for this)
                 Instruction for the Code Chalenge 
 ********************************************************************/
 
-
+// First solution (First way)
+/*
 (
   function game (){
 
@@ -349,6 +350,8 @@ c) correct answer (I would use a number for this)
         this.answerProp = answerProp;
         this.corectAnswer = corectAnswer;
     };
+
+    //Display Question
     
     // chick if the answer is correct
     Question.prototype.correction = function(anw, qt){
@@ -394,12 +397,121 @@ c) correct answer (I would use a number for this)
     for (var i = 0; i < quewiz.answerProp.length; i++){
         console.log(i+'-'+quewiz.answerProp[i]);
     }
-        essai = prompt("enter the correct answer", );
+        essai = prompt("enter the correct answer  ", );
         quewiz.correction (essai, quewiz);
     }
 
   }
-)()
+)() */
+
+//second solution (second way with expert level )
+
+/*
+--- Expert level ---
+
+8. After you display the result, display the next random question, so that the game never ends (Hint: write a function for this and call it right after displaying the result)
+
+9. Be careful: after Task 8, the game literally never ends. So include the option to quit the game if the user writes 'exit' instead of the answer. In this case, DON'T call the function from task 8.
+
+10. Track the user's score to make the game more fun! So each time an answer is correct, add 1 point to the score (Hint: I'm going to use the power of closures for this, but you don't have to, just do this with the tools you feel more comfortable at this point).
+
+11. Display the score in the console. Use yet another method for this.
+*/
+
+(
+    function (){
+        // 1. Build a function constructor
+Question = function (question, answer, correct){
+
+    this.question = question;
+    this.answer = answer;
+    this.correct = correct;
+};
+
+// Display question and answer possibilities
+Question.prototype.DisplayQuestion = function(){
+    console.log(this.question);
+    for ( var i = 0; i<this.answer.length; i++){
+        console.log(i+'-'+this.answer[i]);
+    }
+}
+
+Question.prototype.ifCorrect = function(rp){
+    
+    if (rp === this.correct){
+        score++;
+        console.log('Yes, it\'s correct');
+        console.log('Your score is : '+score);
+    }else {
+        console.log('Wrong Anwer Try it Again');
+        console.log('Your score still : '+score);
+    }
+
+    console.log('--------------------------------');
+}
+
+// 
+
+// 2. Create a couple of questions using the constructor
+
+var q1 = new Question ("Javascript is he a best popular language ?",['True', 'False'], 0);
+var q2 = new Question ("Give me the correct syntax ?",['Var x =  ', 'var x = ', 'var x :'], 1);
+var q3 = new Question ("wich language is not POO language ?",['Paython', 'Java', 'C'], 2);
+
+var score = 0;
+
+//3 . and store all in an array
+
+var arrayQuestion = [q1, q2, q3];
+
+
+
+function nextRandoom (){
+
+//4. Select one random question and log it on the console, together with the possible answers
+
+var n = Math.floor(Math.random() * arrayQuestion.length);
+arrayQuestion[n].DisplayQuestion();
+
+//5- Use the 'prompt' function to ask the user for the correct answer
+
+var resp =  prompt ('choose the correct answer :');
+
+if (resp !== 'exit'){
+//6-  Check if the answer is correct and print to the console whether the answer is correct ot nor
+arrayQuestion[n].ifCorrect(parseInt(resp));
+nextRandoom();
+}
+
+} 
+    nextRandoom();
+}
+)();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
