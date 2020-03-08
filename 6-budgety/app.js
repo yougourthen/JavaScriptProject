@@ -1,17 +1,59 @@
 
 //Data Contoller nammed (budjetController)
 var budjetController = (function (){
-var arrItem = [];
-return {
 
-    addItem : function (item){
+var Expense = function (id, description, value){
+    this.id = id;
+    this.description = description;
+    this.value = value;
+}
 
-         arrItem.push(item);
-         return arrItem;
+var Income = function (id, description, value){
+    this.id = id;
+    this.description = description;
+    this.value = value;
+}
 
+var data = {
+    allItems: {
+        exp : [],
+        inc : []
+
+    },
+    totals : {
+        exp: 0,
+        inc: 0
     }
 
+};
+
+return {
+    addItem : function (type, description, value){
+        var newItem, ID;
+        //Create new ID
+        if (data.allItems[type].length > 0){
+            ID = data.allItems[type] [data.allItems[type].length - 1].id + 1;
+        }else {
+            ID = 0;
+        }
+        
+        //Create a newItem based on 'inc' or 'exp' type 
+        if (type === 'exp'){
+            newItem = new Expense (ID, description, value);
+        }else if (type === 'inc') {
+            newItem = new Income (ID, description, value);
+        }
+        //Add new Item to data structure
+        data.allItems[type].push(newItem);
+        return newItem;
+
+    },
+
+    testFunction : function (){
+        return data;
+    }
 }
+
      
 })();
 
@@ -22,7 +64,8 @@ var UIcontroller = (function (){
     var DOMStrings = {
         inputType : '.add__type',
         inputDescription : '.add__description',
-        inputValue :'.add__value'
+        inputValue :'.add__value',
+        inputBtn : '.add__btn'
     };
 
 return{
@@ -37,6 +80,10 @@ return{
 
     };
 
+    },
+
+    returnDomStrings : function (){
+        return DOMStrings;
     },
 
     displayItem : function(tabitem) {
@@ -57,6 +104,8 @@ return{
         }    
 
     }
+
+    
 }
 
 })();
@@ -64,30 +113,12 @@ return{
 
 // Contoller (link with Data and UI Controller)
 var controller = (function (budjtctrl, UIctrl){
+   
+   var setupEventListner = function (){
 
-   var eventFunction = function (){
+    var dom  = UIctrl.returnDomStrings(); 
 
-        //1. Get the Field Input Data UI
-        var x = UIctrl.getInput();
-        //2. Add the Item To the budjetController (data Structure)
-        var y = budjtctrl.addItem(x);
-        console.log(y);
-        //3.add new item to the UI
-
-        //4. Calculate the budjet
-
-        //4. Display the budjet in the UI 
-        
-
-   }
-
-    
-    document.querySelector('.add__btn').addEventListener('click', function(){
-
-        eventFunction();
-
-    });
-    
+    document.querySelector(dom.inputBtn).addEventListener('click',eventFunction);
 
     document.addEventListener('keypress', function (event){
         
@@ -97,7 +128,37 @@ var controller = (function (budjtctrl, UIctrl){
 
         }
 
+    });
 
-    }); 
+   };
+
+   var eventFunction = function (){
+        var input, newItem
+        //1. Get the Field Input Data UI
+        input = UIctrl.getInput();
+        //2. Add the Item To the budjetController (data Structure)
+        newItem = budjtctrl.addItem(input.type, input.description, input.value);
+        console.log(budjtctrl.testFunction());
+        //3.add new item to the UI
+
+        //4. Calculate the budjet
+
+        //5. Display the budjet in the UI   
+
+   };
+
+   return {
+
+    init : function (){
+        setupEventListner();
+    }
+
+   };
+
+    
+     
 
 })(budjetController, UIcontroller);
+
+controller.init();
+
